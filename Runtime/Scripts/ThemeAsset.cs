@@ -1,9 +1,5 @@
-using HHG.Common.Runtime;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Pool;
-using static HHG.ThemeSystem.Runtime.ToggleStyle;
 
 namespace HHG.ThemeSystem.Runtime
 {

@@ -285,23 +285,23 @@ namespace HHG.ThemeSystem.Runtime
                 label.ApplyTheme(theme, text);
             }
         }
+    }
 
-        [System.Serializable]
-        public class TransitionStyle : Style<Selectable>
+    [System.Serializable]
+    public class TransitionStyle : Style<Selectable>
+    {
+        // The ShowIf attribute does not work for subclasses unless the referenced source handle field is protected
+        [SerializeField] protected Selectable.Transition transition = Selectable.Transition.ColorTint;
+        [SerializeField, ShowIf(nameof(transition), Selectable.Transition.ColorTint)] protected ColorBlock colors = ColorBlock.defaultColorBlock;
+        [SerializeField, ShowIf(nameof(transition), Selectable.Transition.SpriteSwap)] protected SpriteState spriteState;
+        [SerializeField, ShowIf(nameof(transition), Selectable.Transition.Animation)] protected AnimationTriggers animationTriggers;
+
+        public override void ApplyTheme(Selectable selectable)
         {
-            // The ShowIf attribute does not work for subclasses unless the referenced source handle field is protected
-            [SerializeField] protected Selectable.Transition transition = Selectable.Transition.ColorTint;
-            [SerializeField, ShowIf(nameof(transition), Selectable.Transition.ColorTint)] protected ColorBlock colors = ColorBlock.defaultColorBlock;
-            [SerializeField, ShowIf(nameof(transition), Selectable.Transition.SpriteSwap)] protected SpriteState spriteState;
-            [SerializeField, ShowIf(nameof(transition), Selectable.Transition.Animation)] protected AnimationTriggers animationTriggers;
-
-            public override void ApplyTheme(Selectable selectable)
-            {
-                selectable.transition = transition;
-                selectable.colors = colors;
-                selectable.spriteState = spriteState;
-                selectable.animationTriggers = animationTriggers;
-            }
+            selectable.transition = transition;
+            selectable.colors = colors;
+            selectable.spriteState = spriteState;
+            selectable.animationTriggers = animationTriggers;
         }
     }
 }
